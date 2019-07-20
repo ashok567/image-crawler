@@ -24,7 +24,6 @@ def downloader(photo_url):
     requests_url = requests.get(photo_url)
     with open(photo_name + '.jpg', 'ab') as f:
         f.write(requests_url.content)
-    print('Download completed')
 
 
 def download_image(url):

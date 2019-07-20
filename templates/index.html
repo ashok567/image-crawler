@@ -1,33 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Image Downloader</title>
-        <style>
-            /* #header{
-                text-align: center;
-                position: absolute;
-                left: 40%;
-            } */
-
-            #main{    
-                position: absolute;
-                top: 20%;
-                left: 40%;
-            }
-
-            a{
-                text-decoration: none;
-            }
-        </style>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Download Image</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
-        <div id='container'>
-            <div id=main>
-                <form action='/' method='Post'>
-                    <input name='url' type='text' required>
-                    <input name='submit' type='submit'>
-                </form>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/"><img src="./img/icon.png" width="30" height="30" class="d-inline-block align-top" alt="">INSTA-NT GRAM</a>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <form method='Post' id='myform'>
+                            <div class="form-row">
+                                <div class="col-xs-8 col-lg-8">
+                                    <input type="text" class="form-control form-control-lg" name="url" placeholder="Instagram Image URL" required>
+                                </div>
+                                <div class="col-xs-4 col-lg-4">
+                                <button type="submit" name="submit" class="btn btn-dark btn-lg">Download</button>
+                                </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>        
+            <div class="row" id="status">
+                <div class="col-xs-12 col-lg-12">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h2>Download Completed</h2>
+                    </div>SS
+                </div>
+            </div>
+        </div>
     </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $("#myform").bind('ajax:complete', function() {
+            alert("abc")
+        });
+    </script>
 </html>
