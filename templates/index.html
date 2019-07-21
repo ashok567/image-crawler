@@ -15,35 +15,67 @@
             <div class="row">
                 <div class="col-xs-12 col-lg-12">
                     <div class="d-flex justify-content-center align-items-center">
-                        <form method='Post' id='myform'>
+                        <form id='myform'>
                             <div class="form-row">
                                 <div class="col-xs-8 col-lg-8">
                                     <input type="text" class="form-control form-control-lg" name="url" placeholder="Instagram Image URL" required>
                                 </div>
                                 <div class="col-xs-4 col-lg-4">
-                                <button type="submit" name="submit" class="btn btn-dark btn-lg">Download</button>
-                                </div>
+                                    <button type="submit" name="submit" class="btn btn-dark btn-lg">Download</button>
+                                    <span class="label label-warning processing" style="display: none;">
+                                        <i class="glyphicon glyphicon-refresh gly-spin" style='margin-right: 5px;'></i>
+                                        <strong>Processing...</strong>
+                                    </span>
+                                    <input type="hidden" name="_xsrf" value="{{ handler.xsrf_token }}">
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="row" id="status">
+            <div class="row" id="success">
                 <div class="col-xs-12 col-lg-12">
                     <div class="d-flex justify-content-center align-items-center">
-                        <h2>Download Completed</h2>
-                    </div>SS
+                        <h2>Download Successful!!!</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="fail">
+                <div class="col-xs-12 col-lg-12">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h2>Download Unsuccessful!!!</h2>
+                    </div>
                 </div>
             </div>
         </div>
     </body>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-        $("#myform").bind('ajax:complete', function() {
-            alert("abc")
+        $("#myform").submit('click', function(e) {
+            var values = $("#myform").serialize();
+            $('.processing').show();
+            e.preventDefault()
+            $.ajax({
+                type: 'POST',
+                url : '/data',
+                data: values,
+                headers: { 'X-Xsrftoken': "{{ handler.xsrf_token }}" },
+            })
+            .done(function(data){
+                $('.processing').hide();
+                $('#fail').hide();
+                $('#success').show();
+                $("#myform")[0].reset();
+            })
+            .fail(function (error){
+                $('.processing').hide();
+                $('#success').hide();
+                $('#fail').show();
+                $("#myform")[0].reset();
+
+            })
         });
     </script>
 </html>

@@ -2,6 +2,11 @@ form{
     padding: 10px;
 }
 
-#status{
+#success, #fail{
     display: None;
+    padding-top: 50px; 
+}
+
+a{
+    text-decoration: none;
 }
